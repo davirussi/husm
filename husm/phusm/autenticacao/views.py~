@@ -14,7 +14,7 @@ def login(request):
     return render_to_response('login.html', c)
     
 def auth_view(request):
-
+]
     username = request.POST.get('username', '')# se nao existir username no POST coloca '' em username
     password = request.POST.get('password', '')
     user = auth.authenticate(username=username, password=password) #retorna None caso nao encontre o usuario
