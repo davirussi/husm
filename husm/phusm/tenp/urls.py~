@@ -1,0 +1,3 @@
+from django.conf.urls import patterns, url
+from tenp import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
