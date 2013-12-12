@@ -2,7 +2,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect #redirecionar browser para uma url diferente
 from django.contrib import auth #build in authentication
 from django.core.context_processors import csrf #token de autenticacao
-from django.contrib.auth.forms import UserCreationForm #criar o formulario de cadastro usando o auth build in do Django
+#from django.contrib.auth.forms import UserCreationForm #criar o formulario de cadastro usando o auth build in do Django
+from forms import MyRegistrationForm
 
 # Create your views here.
 
@@ -45,14 +46,14 @@ def logout(request):
 
 def register_user(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = MyRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/accounts/register_success')
             
     args = {}
     args.update(csrf(request))
-    args['form'] = UserCreationForm()
+    args['form'] = MyRegistrationForm()
     
     return render_to_response('register.html', args)
 
