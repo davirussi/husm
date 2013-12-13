@@ -29,16 +29,35 @@ class Paciente(models.Model):
 # macronutriente
 class Macronutriente(models.Model):
     TIPOS = (
-        ('Lipidio', 'Lipidio'),
-        ('Glutamina', 'Glutamina'),
         ('Aminoacido', 'Aminoacido'),
-        ('Carboidrato', 'Carboidrato')
+        ('Carboidrato', 'Carboidrato'),
+        ('Glutamina', 'Glutamina'),
+        ('Lipidio', 'Lipidio'),
     )
     
     nome = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=15, choices=TIPOS, default='Carboidrato')    
+    tipo = models.CharField(max_length=15, choices=TIPOS, default='Aminoacido')    
     caloria = models.FloatField(default=0.0, verbose_name='calorias em 100ml')
     porcentagemgrama = models.FloatField(default=0.0, verbose_name="gramas em 100ml")
+    
+    def __unicode__(self):
+        return self.nome
+        
+
+# micronutrientes
+class Micronutriente(models.Model):
+    TIPOS = (
+        ('Calcio', 'Calcio'),
+        ('Fosforo', 'Fosforo'),
+        ('Magnesio', 'Magnesio'),
+        ('Sodio', 'Sodio'),
+    )
+    
+    nome = models.CharField(max_length=20)
+    tipo = models.CharField(max_length=15, choices=TIPOS, default='Sodio')    
+    caloria = models.FloatField(default=0.0, verbose_name='calorias em 100ml')
+    meq = models.FloatField(default=0.0, verbose_name=" mEq em 100ml")
+    meqsodio = models.FloatField(default=0.0, verbose_name=" mEq de sodio em 100ml")
     
     def __unicode__(self):
         return self.nome

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tenp.models import Paciente, Macronutriente
+from tenp.models import Paciente, Macronutriente, Micronutriente
 
 
 class PacienteAdmin(admin.ModelAdmin):
@@ -14,6 +14,13 @@ class MacronutrienteAdmin(admin.ModelAdmin):
     list_editable = ['caloria','porcentagemgrama']
     search_fields = ['nome']    
     
+class MicronutrienteAdmin(admin.ModelAdmin):
+    list_display= ('nome', 'tipo', 'caloria','meq','meqsodio')
+    list_filter = ['tipo']
+    list_editable = ['caloria','meq']
+    search_fields = ['nome']  
+    
 # Register your models here.
 admin.site.register(Paciente,PacienteAdmin)
 admin.site.register(Macronutriente,MacronutrienteAdmin)
+admin.site.register(Micronutriente,MicronutrienteAdmin)
