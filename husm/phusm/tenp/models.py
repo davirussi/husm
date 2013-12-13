@@ -24,3 +24,21 @@ class Paciente(models.Model):
     
     def __unicode__(self):
         return self.nome
+        
+        
+# macronutriente
+class Macronutriente(models.Model):
+    TIPOS = (
+        ('Lipidio', 'Lipidio'),
+        ('Glutamina', 'Glutamina'),
+        ('Aminoacido', 'Aminoacido'),
+        ('Carboidrato', 'Carboidrato')
+    )
+    
+    nome = models.CharField(max_length=20)
+    tipo = models.CharField(max_length=15, choices=TIPOS, default='Carboidrato')    
+    caloria = models.FloatField(default=0.0, verbose_name='calorias em 100ml')
+    porcentagemgrama = models.FloatField(default=0.0, verbose_name="gramas em 100ml")
+    
+    def __unicode__(self):
+        return self.nome
