@@ -15,7 +15,7 @@ class Paciente(models.Model):
     sexo = models.CharField(max_length=1, choices=SEXO, default=HOMEM)    
     datanascimento = models.DateField('Data Nascimento', default=datetime.date.today)
     iniciotratamento = models.DateField('Inicio Tratamento', default=datetime.date.today)
-    peso = models.FloatField(default=0.0)
+    peso = models.FloatField()
     altura = models.FloatField(blank=True, null=True)
     same = models.CharField(max_length=20, blank=True, null=True)
     convenio = models.CharField(max_length=10, blank=True, default='SUS', null=True)
