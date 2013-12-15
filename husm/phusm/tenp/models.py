@@ -51,6 +51,7 @@ class Micronutriente(models.Model):
         ('Fosforo', 'Fosforo'),
         ('Magnesio', 'Magnesio'),
         ('Sodio', 'Sodio'),
+        ('Potassio', 'Potassio'),
     )
     
     nome = models.CharField(max_length=20)
