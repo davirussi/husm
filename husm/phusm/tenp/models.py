@@ -62,5 +62,21 @@ class Micronutriente(models.Model):
     def __unicode__(self):
         return self.nome
         
+        
+# macronutriente
+class Outronutriente(models.Model):
+    TIPOS = (
+        ('Oligoelementos', 'Oligoelementos'),
+        ('Zinco', 'Zinco'),
+        ('Selenio', 'Selenio'),
+    )
+    
+    nome = models.CharField(max_length=20)
+    tipo = models.CharField(max_length=15, choices=TIPOS, default='Oligoelemento')    
+    caloria = models.FloatField(default=0.0, verbose_name='calorias em 100ml')
+    porcentagemgrama = models.FloatField(default=0.0, verbose_name="gramas em 100ml")
+    
+    def __unicode__(self):
+        return self.nome
 
     
