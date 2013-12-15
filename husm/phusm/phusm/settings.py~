@@ -23,6 +23,8 @@ SECRET_KEY = ')i7e@f$xwee$)p33nl8v%u=ck++!z(+*mqfxut#a@^zo=()3_l'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+print (os.path.join(BASE_DIR, 'templates'))
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 ALLOWED_HOSTS = []
 
@@ -67,7 +69,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 

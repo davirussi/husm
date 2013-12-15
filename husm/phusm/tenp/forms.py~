@@ -1,0 +1,12 @@
+from django import forms
+from django.contrib import admin
+from tenp.models import Micronutriente
+
+class MyMicronutrienteForm(forms.ModelForm):
+
+    class Meta:
+        model = Micronutriente
+        exclude = ['nome']
+
+class MicronutrienteAdmin(admin.ModelAdmin):
+    form = MyMicronutrienteForm

@@ -54,10 +54,13 @@ class Micronutriente(models.Model):
     )
     
     nome = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=15, choices=TIPOS, default='Sodio')    
+    tipo = models.CharField(max_length=15, choices=TIPOS, default='Calcio')    
     caloria = models.FloatField(default=0.0, verbose_name='calorias em 100ml')
     meq = models.FloatField(default=0.0, verbose_name=" mEq em 100ml")
     meqsodio = models.FloatField(default=0.0, verbose_name=" mEq de sodio em 100ml")
     
     def __unicode__(self):
         return self.nome
+        
+
+    
