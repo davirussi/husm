@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.contrib.auth.models import User
 
 # paciente
 class Paciente(models.Model):
@@ -18,6 +19,7 @@ class Paciente(models.Model):
     peso = models.FloatField(default=0.0)
     altura = models.FloatField(blank=True, null=True)
     same = models.CharField(max_length=20, blank=True, null=True)
+    leito = models.CharField(max_length=10, blank=True, null=True)
     convenio = models.CharField(max_length=10, blank=True, default='SUS', null=True)
     prematuro = models.BooleanField(blank=True)
     ativo = models.BooleanField(default=True)
@@ -81,4 +83,40 @@ class Outronutriente(models.Model):
     def __unicode__(self):
         return self.nome
 
+# prescricao
+class Prescricao(models.Model): 
+    TIPOS = (
+        ('Central', 'Central'),
+        ('Periferica', 'Periferica'),
+    ) 
+    nomepaciente = models.ForeignKey(Paciente, verbose_name='Paciente')
+    nomemedico = models.ForeignKey(User, verbose_name='Medico')
+    fluido = models.FloatField(default=0.0, verbose_name='Fluido em ml')
+    via = models.CharField(max_length=11, choices=TIPOS, default='Central')  
+    caloria = models.FloatField(default=0.0, verbose_name='Oferta Calorica')
+    dataprescricao = models.DateField('Data Prescricao', default=datetime.date.today)
+    dataentrega = models.DateField('Data Entrega', default=datetime.date.today)
+    osmolaridade = models.FloatField(default=0.0, verbose_name='Osmolaridade')
+    macronutriente = models.ManyToManyField(Macronutriente, through='MacronutrientePrescricao')
+    micronutriente = models.ManyToManyField(Micronutriente, through='MicronutrientePrescricao')
+    outronutriente = models.ManyToManyField(Outronutriente, through='OutronutrientePrescricao')
+    def __unicode__(self):
+        return unicode(self.nomepaciente)
+
+#tabelas n para n modificadas     
+class MacronutrientePrescricao(models.Model):
+    macronutriente = models.ForeignKey(Macronutriente)
+    prescricao = models.ForeignKey(Prescricao)
+    quantidade = models.FloatField(default=0.0, verbose_name='Quantidade em gramas')
     
+class MicronutrientePrescricao(models.Model):
+    micronutriente = models.ForeignKey(Micronutriente)
+    prescricao = models.ForeignKey(Prescricao)
+    quantidade = models.FloatField(default=0.0, verbose_name='Quantidade em meqs')
+    
+class OutronutrientePrescricao(models.Model):
+    outronutriente = models.ForeignKey(Outronutriente)
+    prescricao = models.ForeignKey(Prescricao)
+    quantidade = models.FloatField(default=0.0, verbose_name='Quantidade em gramas')
+    
+

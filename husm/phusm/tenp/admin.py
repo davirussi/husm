@@ -1,6 +1,7 @@
 from django.contrib import admin
-from tenp.models import Paciente, Macronutriente, Micronutriente, Outronutriente
+from tenp.models import Paciente, Macronutriente, Micronutriente, Outronutriente, Prescricao, MacronutrientePrescricao, MicronutrientePrescricao, OutronutrientePrescricao
 from django import forms
+from django.contrib.auth.models import User
 
 
 class PacienteAdmin(admin.ModelAdmin):
@@ -47,8 +48,34 @@ class MicronutrienteAdmin(admin.ModelAdmin):
             'js/admin-forms.js',
         ) 
 
+class MacronutrientePrescricaoInline(admin.TabularInline):
+    model = MacronutrientePrescricao
+    extra = 1
+
+class MicronutrientePrescricaoInline(admin.TabularInline):
+    model = MicronutrientePrescricao
+    extra = 1
+
+class OutronutrientePrescricaoInline(admin.TabularInline):
+    model = OutronutrientePrescricao
+    extra = 1
+
+class PrescricaoAdmin(admin.ModelAdmin):
+    list_display= ('nomemedico', 'nomepaciente', 'dataprescricao')
+    list_filter = ['nomemedico', 'nomepaciente']
+    search_fields = ['nomemedico__username','nomepaciente__nome']
+    inlines = (MacronutrientePrescricaoInline,
+               MicronutrientePrescricaoInline,
+               OutronutrientePrescricaoInline,)
+    def render_change_form(self, request, context, *args, **kwargs):
+         context['adminform'].form.fields['nomemedico'].queryset = User.objects.filter(is_staff=False)
+         context['adminform'].form.fields['nomepaciente'].queryset = Paciente.objects.filter(ativo=True)
+         return super(PrescricaoAdmin, self).render_change_form(request, context, args, kwargs)  
+
+
 # Register your models here.
 admin.site.register(Paciente,PacienteAdmin)
 admin.site.register(Macronutriente,MacronutrienteAdmin)
 admin.site.register(Micronutriente,MicronutrienteAdmin)
 admin.site.register(Outronutriente,OutronutrienteAdmin)
+admin.site.register(Prescricao, PrescricaoAdmin)
