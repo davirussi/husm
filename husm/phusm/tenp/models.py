@@ -32,7 +32,7 @@ class Macronutriente(models.Model):
         ('Aminoacido', 'Aminoacido'),
         ('Carboidrato', 'Carboidrato'),
         ('Glutamina', 'Glutamina'),
-        ('Lipidio', 'Lipidio'),
+        ('Lipideo', 'Lipideo'),
     )
     
     nome = models.CharField(max_length=20)
@@ -70,6 +70,7 @@ class Outronutriente(models.Model):
         ('Oligoelementos', 'Oligoelementos'),
         ('Zinco', 'Zinco'),
         ('Selenio', 'Selenio'),
+        ('Agua Destilada', 'Agua Destilada'),
     )
     
     nome = models.CharField(max_length=20)

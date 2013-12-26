@@ -32,7 +32,7 @@ class Macronutriente(models.Model):
         ('Aminoacido', 'Aminoacido'),
         ('Carboidrato', 'Carboidrato'),
         ('Glutamina', 'Glutamina'),
-        ('Lipidio', 'Lipidio'),
+        ('Lipideo', 'Lipideo'),
     )
     
     nome = models.CharField(max_length=20)
@@ -51,6 +51,7 @@ class Micronutriente(models.Model):
         ('Fosforo', 'Fosforo'),
         ('Magnesio', 'Magnesio'),
         ('Sodio', 'Sodio'),
+        ('Potassio', 'Potassio'),
     )
     
     nome = models.CharField(max_length=20)
