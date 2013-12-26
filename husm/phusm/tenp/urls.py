@@ -4,4 +4,5 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('',
         url(r'^$',views.index,name='index'),
+        url(r'^prescrever/$', 'tenp.views.prescrever'),
         )

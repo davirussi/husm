@@ -1,0 +1,14 @@
+{% extends "index.html"%}
+
+{%block content%}
+
+    <h2> Prescricao </h2>
+    <form action ="/accounts/prescrever/" method="post">{% csrf_token %}
+    
+    {{form}}
+    
+    <input type="submit" value="Prescrever" />
+    
+    </form>
+
+{%endblock%}
